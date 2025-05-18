@@ -29,7 +29,7 @@ form{
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-bottom: 30px;
+    margin-bottom: 0.8rem;
 }
 
 .search-input{
@@ -72,6 +72,15 @@ button:active{
     box-shadow: 1px 1px 2px 1px #636161;
 }
 
+#sortDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 6px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
 img{
     display: block;
     min-width: 100%;
@@ -89,11 +98,28 @@ img:hover{
 .image-container{
     display: grid;
     place-content: center;
+    text-align: center;
     grid-template-columns: repeat(auto-fit,minmax(220px,0.4fr));
     gap: 20px;
     width: 90%;
     margin: 10px auto;
 
+}
+
+.movie-card{
+    text-align: center;
+    background-color: rgb(7, 134, 117);
+    border-radius: 0.5rem;
+    color: white;
+    box-shadow: 0 0 5px white;
+}
+
+.movie-text{
+    line-height: 1.4rem;
+}
+
+h3{
+    padding: 1rem;
 }
 
 @media (max-width:580px)

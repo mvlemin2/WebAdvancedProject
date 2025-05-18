@@ -4,11 +4,11 @@ Functionele vereisten
 Dataverzameling & -weergave:  
     Haal data op van de API (API endpoint met minstens 20 op te halen objecten): ok
     Toon de data op een visueel aantrekkelijke manier: lijst/tabel (+ kaart of andere visuele weergave naargelang API): ok
-   > Zorg voor duidelijke details van de getoonde items (de lijstweergave toont minstens 6 kolommen)
+    Zorg voor duidelijke details van de getoonde items (de lijstweergave toont minstens 6 kolommen): ok
 Interactiviteit:  
-   > Filter functionaliteit (op type, locatie, datum, etc.)
-    Zoekfunctie: ok
-   > Sorteermogelijkheden
+   Filter functionaliteit (op type, locatie, datum, etc.): ok
+   Zoekfunctie: ok
+   Sorteermogelijkheden: ok
 Personalisatie:  
   >  Gebruikers kunnen favoriete locaties/gebeurtenissen opslaan
   >  Data wordt bewaard tussen sessies
@@ -28,14 +28,14 @@ DOM manipulatie:
     Events aan elementen koppelen: bij het wisselen van thema (bij het klikken op de themeButton)
 Modern JavaScript:  
     Gebruik van constanten: het wisselen van thema (const themeButton, const body)
-   > Template literals
+    Template literals: bij movieCard
    > Iteratie over arrays -> kan misschien bij wijzigen bordercolor van images?
    > Array methodes -> bij toevoegen aan favo's?
     Arrow functions: bij de zoekopdracht
-   > Conditional (ternary) operator (moderne if..else): bij het wisselen van thema (niet meer)
+   Conditional (ternary) operator (moderne if..else): bij het bepalen van rating
    > Callback functions
    > Promises
-    Async & Await: bij de searchAPI functie
+   > Async & Await: bij de searchAPI functie
    > Observer API (1 is voldoende)
 Data & API:  
     Fetch om data op te halen: bij de searchAPI functie

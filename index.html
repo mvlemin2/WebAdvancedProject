@@ -13,11 +13,28 @@
         <input type="text" class="search-input" placeholder="Zoek een film...">
         <button>Zoeken</button>
     </form>
-    <button>Sorteer op jaar van release</button>
+    <!-- <button id="btn-sort-rating">Sorteer oplopend op rating</button>
+    <button id="btn-sort-alpha">Sorteer van A naar Z</button> -->
+
+    <div id="sortDiv">
+      <label for="sort">Sorteer op:</label>
+      <select id="sort">
+          <option value="title-ascending">Titel (A-Z)</option>
+          <option value="title-descending">Titel (Z-A)</option>
+      </select>
+      <label for="limit">Aantal:</label>
+      <select id="limit">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+      </select>
+      <button id="btn-sort">Sorteren</button>
+  </div>
     
     <div class="image-container">
     </div>
-    <script src="src/script.mjs"></script>
+    <script src="src/script2.mjs"></script>
     <!-- <script src="src/intersectionObserver.mjs"></script> -->
   </body>
 </html>
