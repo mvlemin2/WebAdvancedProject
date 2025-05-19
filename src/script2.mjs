@@ -1,8 +1,13 @@
 'use strict';
 
 const themeToggleButton = document.getElementById('change-theme');
+const showFavoritesButton = document.getElementById('favorites');
 const body = document.body;
+let favoriteMovies = [];
+let movieArray = [];
+let counterArray = 0;
 loadTheme();
+loadFavorites();
 
 //Thema wisselen
 function toggleTheme() {
@@ -33,7 +38,7 @@ function toggleTheme() {
     }
   }
 
-document.addEventListener('DOMContentLoaded', () => {
+//document.addEventListener('DOMContentLoaded', () => {
     console.log("Script loaded");
 
     const form = document.querySelector('form')
@@ -41,7 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortButton = document.getElementById('btn-sort');
     const sortSelect = document.getElementById('sort');
     const limitSelect = document.getElementById('limit');
-    let movieArray = [];
+    // let movieArray = [];
+    // let counterArray = 0;
+    const searchButton = document.getElementById('search-btn');
+    startCounter();
 
     // Functie om movie card te maken
     function createMovieCard(movie) {
@@ -49,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
         movieCard.className = 'movie-card';
         const movieText = document.createElement('div');
         movieText.className = 'movie-text';
-                
+
         const img = document.createElement('img');
-        img.src=movie.show.image.medium;
+        img.src=movie.show.image?.medium;
         //img.classList.add('lazy-image');
 
         const title = movie.show.name;
@@ -63,8 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>${title}</h3>
         <p>Taal: ${language}</p>
         <p>Rating: ${ratingDisplay}</p>
+        <button class="btn-favorite" value="${counterArray}" onclick="addToFavorites(${counterArray})">+${counterArray}</button>
         `;
-
+        counterArray++;
         movieCard.appendChild(img);
         movieCard.appendChild(movieText);
         
@@ -75,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function sortMovies() {
         const sortOption = sortSelect.value;
         const limit = parseInt(limitSelect.value);
+        counterArray = 0;
        
         // Films sorteren op basis van geselecteerde optie
         switch(sortOption) {
@@ -113,7 +123,8 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
     let query = form.querySelector('input').value;
     form.querySelector('input').value='';
-    
+    counterArray = 0;
+
     if(query==''){
         alert("Geen geldige zoekopdracht.");
     }
@@ -132,6 +143,7 @@ async function searchAPI(query){
             if (!response.ok) {
                 throw new Error(`HTTP fout! Status: ${response.status}`);
             }
+            console.log(response.status);
             return response.json();
         })
         .then(movies => {
@@ -152,5 +164,44 @@ async function searchAPI(query){
         });
 
 }
+    
+    function advertisementPremiumVersion() {
+        return new Promise(resolve => {
+        const handleClick = () => {
+            //searchButton.removeEventListener('click', handleClick);
+            resolve();
+            };
+            searchButton.addEventListener('click', handleClick);
+        });
+    }
+    
+    // Functie: na 10 zoekopdrachten verschijnt er een pop-upadvertentie om over te schakelen op de premium versie van de app
+    async function startCounter() {
+        let count = 0;
+        while(count === 0){
+            while (count < 10) {
+                await advertisementPremiumVersion();
+                count++;        
+                console.log(`${count} zoekopdracht(en) geregistreerd`);
+                }
+            alert("Schakel nu over op de Premium-versie zonder advertenties!");
+            count = 0;
+        }
+    }
 
-});
+//});
+
+function addToFavorites(getal){
+    console.log(`Toegevoegd aan favorieten ${getal}`);
+    alert("Toegevoegd aan favorieten");
+    favoriteMovies.push(movieArray[getal]);
+    console.log(favoriteMovies);
+    localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+}
+
+function loadFavorites() {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      favoriteMovies = JSON.parse(savedFavorites);
+    }
+  }

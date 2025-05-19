@@ -10,8 +10,8 @@ Interactiviteit:
    Zoekfunctie: ok
    Sorteermogelijkheden: ok
 Personalisatie:  
-  >  Gebruikers kunnen favoriete locaties/gebeurtenissen opslaan
-  >  Data wordt bewaard tussen sessies
+    Gebruikers kunnen favoriete locaties/gebeurtenissen opslaan ok
+    Data wordt bewaard tussen sessies ok
     Gebruikersvoorkeuren opslaan (we hebben tijdens de lessen aantal voorbeelden gezien zoals geolocatie, taalkeuze, themaswitcher, favorieten, gecachte API-data, ...): ok
 Gebruikerservaring:  
     Responsive design: ok
@@ -29,13 +29,13 @@ DOM manipulatie:
 Modern JavaScript:  
     Gebruik van constanten: het wisselen van thema (const themeButton, const body)
     Template literals: bij movieCard
-   > Iteratie over arrays -> kan misschien bij wijzigen bordercolor van images?
-   > Array methodes -> bij toevoegen aan favo's?
+   > Iteratie over arrays => bij toevoegen aan favo's?
+   > Array methodes => bij toevoegen aan favo's?
     Arrow functions: bij de zoekopdracht
    Conditional (ternary) operator (moderne if..else): bij het bepalen van rating
-   > Callback functions
-   > Promises
-   > Async & Await: bij de searchAPI functie
+   Callback functions: vb) Event listener voor de sortButton
+   Promises: fetchen van data (data ophalen)
+   Async & Await: => 10 opzoekingen en dan vraag om over te schakelen op premium versie? (advertisementPremiumVersion)
    > Observer API (1 is voldoende)
 Data & API:  
     Fetch om data op te halen: bij de searchAPI functie

@@ -8,10 +8,11 @@
   </head>
   <body class="dark-theme">
     <button id="change-theme">Licht thema</button>
+    <button id="favorites">Favorieten</button>
     <h1>Filmoverzicht</h1>
     <form action="">
         <input type="text" class="search-input" placeholder="Zoek een film...">
-        <button>Zoeken</button>
+        <button id="search-btn">Zoeken</button>
     </form>
     <!-- <button id="btn-sort-rating">Sorteer oplopend op rating</button>
     <button id="btn-sort-alpha">Sorteer van A naar Z</button> -->
@@ -24,10 +25,9 @@
       </select>
       <label for="limit">Aantal:</label>
       <select id="limit">
+          <option value="2">2</option>
           <option value="5">5</option>
           <option value="10" selected>10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
       </select>
       <button id="btn-sort">Sorteren</button>
   </div>

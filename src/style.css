@@ -56,11 +56,24 @@ button{
     transition: 1s;
 }
 
+.btn-favorite{
+    background-color: rgb(7, 134, 24);
+    border: 1px solid white;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
 #change-theme{
     background-color:lightgray;
     color: black;
     position: absolute;
     inset: 1rem 1rem auto auto;
+}
+
+#favorites{
+    position: absolute;
+    inset: 1rem auto auto 1rem;
+    background-color: deeppink;
 }
 
 button:hover{
