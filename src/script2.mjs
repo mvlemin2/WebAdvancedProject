@@ -1,7 +1,8 @@
 'use strict';
 
 const themeToggleButton = document.getElementById('change-theme');
-const showFavoritesButton = document.getElementById('favorites');
+//themeToggleButton.addEventListener('mousover', themeToggleButton.backgroundColor ="#333333");
+const showFavoritesButton = document.getElementById('btn-favorites');
 const body = document.body;
 let favoriteMovies = [];
 let movieArray = [];
@@ -38,6 +39,8 @@ function toggleTheme() {
     }
   }
 
+
+
 //document.addEventListener('DOMContentLoaded', () => {
     console.log("Script loaded");
 
@@ -50,6 +53,10 @@ function toggleTheme() {
     // let counterArray = 0;
     const searchButton = document.getElementById('search-btn');
     startCounter();
+
+    if(movieArray.length === 0){
+        sortButton.disabled = true;
+    }
 
     // Functie om movie card te maken
     function createMovieCard(movie) {
@@ -66,13 +73,39 @@ function toggleTheme() {
         const language = movie.show.language;
         const rating = movie.show.rating.average;
         let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
+        
+        function showAddFavoriteButton() {
+            for(let favorite of favoriteMovies){
+                if(favorite.show.id === movie.show.id){
+                    return "noShowButton";
+                }    
+            }
+            return "showButton";
+        }
+
+        function showRemoveFromFavoritesButton() {
+            for(let favorite of favoriteMovies){
+                if(favorite.show.id === movie.show.id){
+                    return "showButton";
+                }    
+            }
+            return "noShowButton";
+        }
+
+        const visibilityButtonAddFavorites = showAddFavoriteButton();
+        const visibilityButtonRemovefavorites = showRemoveFromFavoritesButton();
 
         movieText.innerHTML = `
         <h3>${title}</h3>
         <p>Taal: ${language}</p>
         <p>Rating: ${ratingDisplay}</p>
-        <button class="btn-favorite" value="${counterArray}" onclick="addToFavorites(${counterArray})">+${counterArray}</button>
+        <button class="btn-favorite ${visibilityButtonAddFavorites}" value="${counterArray}" onclick="addToFavorites(${counterArray})">+</button>
+        <button class="btn-remove ${visibilityButtonRemovefavorites}" value="${counterArray}" onclick="removeFromFavorites(${counterArray})">X</button>
         `;
+
+
+
+
         counterArray++;
         movieCard.appendChild(img);
         movieCard.appendChild(movieText);
@@ -82,6 +115,7 @@ function toggleTheme() {
 
     // Functie om films te sorteren
     function sortMovies() {
+        sortButton.disabled = false;
         const sortOption = sortSelect.value;
         const limit = parseInt(limitSelect.value);
         counterArray = 0;
@@ -104,7 +138,8 @@ function toggleTheme() {
     
         // Controleren of er films in de Array zitten om weer te geven
         if (movieArray.length === 0) {
-            gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden die voldoen aan je zoekopdracht.</div>';
+            sortButton.disabled = true;
+            gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden. Probeer een nieuwe zoekopdracht.</div>';
             return;
         }
     
@@ -192,10 +227,20 @@ async function searchAPI(query){
 //});
 
 function addToFavorites(getal){
+      for(let movie of favoriteMovies){
+        if(movie.show.id === movieArray[getal].show.id){
+            alert("Deze film werd al toegevoegd aan de favorieten");
+            return;
+        }
+    }
+
+    //console.log(movieArray[getal].show.id);
+
     console.log(`Toegevoegd aan favorieten ${getal}`);
     alert("Toegevoegd aan favorieten");
     favoriteMovies.push(movieArray[getal]);
     console.log(favoriteMovies);
+    sortMovies();
     localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
 }
 
@@ -205,3 +250,63 @@ function loadFavorites() {
       favoriteMovies = JSON.parse(savedFavorites);
     }
   }
+
+function viewFavorites(){
+    // for(let favorite of favoriteMovies){
+    //     createFavoritesCard(favorite);
+    //     gallery.appendChild(favoriteCard);
+    // }
+    //console.log(favoriteMovies);
+    gallery.innerHTML = '';
+    counterArray = 0;
+    movieArray = favoriteMovies;
+    sortMovies();
+    // favoriteMovies.forEach(movie => {
+    //     //console.log(movie);
+    //     //const favoriteCard = createFavoritesCard(movie);
+    //     //gallery.appendChild(favoriteCard);
+    // });
+}
+
+// function createFavoritesCard(favorite) {
+//     const favoriteCard = document.createElement('div');
+//     favoriteCard.className = 'movie-card';
+//     const favoriteText = document.createElement('div');
+//     favoriteText.className = 'movie-text';
+
+//     const img = document.createElement('img');
+//     img.src=favorite.show.image?.medium;
+//     //img.classList.add('lazy-image');
+
+//     const title = favorite.show.name;
+//     const language = favorite.show.language;
+//     const rating = favorite.show.rating.average;
+//     let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
+
+//     favoriteText.innerHTML = `
+//     <h3>${title}</h3>
+//     <p>Taal: ${language}</p>
+//     <p>Rating: ${ratingDisplay}</p>
+//     <button class="btn-remove" value="${counterArray}" onclick="removeFromFavorites(${counterArray})">X</button>
+//     `;
+//     counterArray++;
+//     favoriteCard.appendChild(img);
+//     favoriteCard.appendChild(favoriteText);
+    
+//     return favoriteCard;
+// }
+
+showFavoritesButton.addEventListener('click', viewFavorites);
+
+//console.log(favoriteMovies);
+function removeFromFavorites(getal){
+    
+  //console.log(movieArray[getal].show.id);
+
+  console.log(`Verwijderd uit favorieten ${getal}`);
+  alert("Verwijderd uit favorieten");
+  favoriteMovies.splice(getal, 1);
+  console.log(favoriteMovies);
+  localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+  viewFavorites();
+}

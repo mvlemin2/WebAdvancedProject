@@ -29,13 +29,13 @@ DOM manipulatie:
 Modern JavaScript:  
     Gebruik van constanten: het wisselen van thema (const themeButton, const body)
     Template literals: bij movieCard
-   > Iteratie over arrays => bij toevoegen aan favo's?
-   > Array methodes => bij toevoegen aan favo's?
+    Iteratie over arrays: bij toevoegen aan favo's?
+    Array methodes: bij toevoegen aan favo's?
     Arrow functions: bij de zoekopdracht
-   Conditional (ternary) operator (moderne if..else): bij het bepalen van rating
-   Callback functions: vb) Event listener voor de sortButton
-   Promises: fetchen van data (data ophalen)
-   Async & Await: => 10 opzoekingen en dan vraag om over te schakelen op premium versie? (advertisementPremiumVersion)
+    Conditional (ternary) operator (moderne if..else): bij het bepalen van rating
+    Callback functions: vb) Event listener voor de sortButton
+    Promises: fetchen van data (data ophalen)
+    Async & Await: => 10 opzoekingen en dan vraag om over te schakelen op premium versie? (advertisementPremiumVersion)
    > Observer API (1 is voldoende)
 Data & API:  
     Fetch om data op te halen: bij de searchAPI functie
@@ -46,7 +46,7 @@ Opslag & validatie:
 Styling & layout:  
     Basis HTML layout (flexbox of CSS grid kan hiervoor worden gebruikt): ok
     Basis CSS: ok
-   > Gebruiksvriendelijke elementen (verwijderknoppen, icoontjes,...)
+    Gebruiksvriendelijke elementen (verwijderknoppen, icoontjes,...)
 Tooling & structuur: 
     Project is opgezet met Vite : ok
     Een correcte folderstructuur wordt aangehouden (gescheiden html, css en js files, src folder, dist folder, ...): ok

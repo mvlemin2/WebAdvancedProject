@@ -21,6 +21,7 @@ h1{
     text-align: center;
     /* color: white; */
     margin-top: 1rem;
+    /* z-index: -10; */
 }
 
 form{
@@ -56,11 +57,40 @@ button{
     transition: 1s;
 }
 
+button[disabled]{
+    background-color: #636161;
+    cursor: default;
+}
+
+button[disabled]:hover{
+    background-color: #636161;
+    cursor: default;
+}
+
 .btn-favorite{
     background-color: rgb(7, 134, 24);
     border: 1px solid white;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
+}
+
+.btn-favorite:hover{
+    background-color: rgb(140, 226, 151);
+}
+
+.btn-remove{
+    background-color: deeppink;
+    border: 1px solid white;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.btn-remove:hover{
+    background-color: rgb(250, 135, 196);
+}
+
+.noShowButton{
+    display: none;
 }
 
 #change-theme{
@@ -70,16 +100,25 @@ button{
     inset: 1rem 1rem auto auto;
 }
 
-#favorites{
+#change-theme:hover{
+    background-color:rgb(71, 71, 71);
+}
+
+#btn-favorites{
     position: absolute;
     inset: 1rem auto auto 1rem;
     background-color: deeppink;
+}
+
+#btn-favorites:hover{
+    background-color: rgb(250, 135, 196);
 }
 
 button:hover{
     cursor: pointer;
     background-color: rgba(6, 118, 118, 0.85);
 }
+
 button:active{
     transform: translate(2px,2px);
     box-shadow: 1px 1px 2px 1px #636161;
@@ -143,4 +182,9 @@ h3{
     .image-container{
         grid-template-columns: repeat(auto-fit,minmax(250px,300px));
     }
+
+    h1{
+        margin-top: 4rem;
+    }
+
 }
