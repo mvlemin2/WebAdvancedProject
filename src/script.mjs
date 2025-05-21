@@ -5,6 +5,7 @@ const themeToggleButton = document.getElementById('change-theme');
 const showFavoritesButton = document.getElementById('btn-favorites');
 const numberOfFavorites = document.getElementById('numberOfFavorites');
 const body = document.body;
+const header = document.getElementById('header');
 let favoriteMovies = []; //Array voor favorieten
 let movieArray = []; //Array voor de resultaten die op het scherm moeten komen
 let counterArray = 0; //counter voor index van elementen op het scherm
@@ -29,10 +30,14 @@ function toggleTheme() {
     if (body.classList.contains('light-theme')) {
       body.classList.replace('light-theme', 'dark-theme');
       themeToggleButton.textContent = 'Licht thema';
+      header.style.background = 'black';
+      header.style.borderBottom = 'none';
       localStorage.setItem('theme', 'dark-theme'); //Thema opslaan in LocalStorage
     } else {
       body.classList.replace('dark-theme', 'light-theme');
       themeToggleButton.textContent = 'Donker thema';
+      header.style.background = 'white';
+      header.style.borderBottom = '2px solid rgb(7, 134, 117)';
       localStorage.setItem('theme', 'light-theme'); //Thema opslaan in LocalStorage
     }
   }
@@ -47,8 +52,12 @@ function loadTheme() {
         body.className = savedTheme;
         if (savedTheme === 'dark-theme') {
         themeToggleButton.textContent = 'Licht thema';
+        header.style.background = 'black';
+        header.style.borderBottom = 'none';
         } else {
         themeToggleButton.textContent = 'Donker thema';
+        header.style.background = 'white';
+        header.style.borderBottom = '2px solid rgb(7, 134, 117)';
         }
     }
 }
@@ -133,18 +142,18 @@ function sortMovies() {
             break;
     }
 
-    movieArray = movieArray.slice(0, limit); //Aantal resultaten limiteren op basis van selectie
+    const movieArray2 = movieArray.slice(0, limit); //Aantal resultaten limiteren op basis van selectie
     gallery.innerHTML = ''; //Gallery leegmaken
 
     //Controleren of er films in de Array zitten om weer te geven
-    if (movieArray.length === 0) {
+    if (movieArray2.length === 0) {
         sortButton.disabled = true;
         gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden. Probeer een nieuwe zoekopdracht.</div>';
         return;
     }
 
     //Films toevoegen aan gallery
-    movieArray.forEach(movie => {
+    movieArray2.forEach(movie => {
         const movieCard = createMovieCard(movie);
         gallery.appendChild(movieCard);
     });
@@ -226,9 +235,9 @@ function addToFavorites(getal){
     }
 
     favoriteMovies.push(movieArray[getal]); //Toevoegen aan Array
+    localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
     sortMovies(); //Gallery updaten zodat de juiste buttons verschijnen op de elementen
     numberOfFavorites.textContent = `${favoriteMovies.length}`; //Aantal updaten
-    localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
 }
 
 //Functie om de opgeslagen favorieten te laden bij het bezoeken van de website
@@ -256,9 +265,9 @@ function removeFromFavorites(getal){
         if(movie.show.id === movieArray[getal].show.id){
             let index = favoriteMovies.indexOf(movie);
             favoriteMovies.splice(index, 1);
+            localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
             sortMovies(); //Gallery updaten zodat de juiste buttons verschijnen op de elementen
             numberOfFavorites.textContent = `${favoriteMovies.length}`; //Aantal updaten
-            localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
         }
     }
 }
