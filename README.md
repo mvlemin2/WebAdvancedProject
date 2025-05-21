@@ -36,7 +36,7 @@ Modern JavaScript:
     Callback functions: vb) Event listener voor de sortButton
     Promises: fetchen van data (data ophalen)
     Async & Await: => 10 opzoekingen en dan vraag om over te schakelen op premium versie? (advertisementPremiumVersion)
-   > Observer API (1 is voldoende)
+    Observer API (1 is voldoende): favorieten
 Data & API:  
     Fetch om data op te halen: bij de searchAPI functie
     JSON manipuleren en weergeven: combinatie van de functies searchAPI en displayGallery

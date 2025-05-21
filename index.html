@@ -5,14 +5,18 @@
     <link rel="stylesheet" href="src/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marianne Vleminckx Filmoverzicht</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body class="dark-theme">
-    <button id="change-theme">Licht thema</button>
-    <button id="btn-favorites">Favorieten</button>
+    <i class="fa-solid fa-circle-half-stroke"></i><button id="change-theme">Licht thema</button>
+    <div id="numberOfFavorites">
+      <!-- <p id="numberOfFavoritesP"></p> -->
+    </div>
+    <button id="btn-favorites"><i class="fa-solid fa-heart"></i> Favorieten</button>
     <h1>Filmoverzicht</h1>
     <form action="">
         <input type="text" class="search-input" placeholder="Zoek een film...">
-        <button id="search-btn">Zoeken</button>
+        <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Zoeken</button>
     </form>
     <!-- <button id="btn-sort-rating">Sorteer oplopend op rating</button>
     <button id="btn-sort-alpha">Sorteer van A naar Z</button> -->
@@ -29,12 +33,12 @@
           <option value="10" selected>10</option>
           <option value="20">20</option>
       </select>
-      <button id="btn-sort">Sorteren</button>
+      <button id="btn-sort"><i class="fa-solid fa-sort"></i> Sorteren</button>
   </div>
     
     <div class="image-container">
     </div>
-    <script src="src/script2.mjs"></script>
+    <script src="src/script.mjs"></script>
     <!-- <script src="src/intersectionObserver.mjs"></script> -->
   </body>
 </html>

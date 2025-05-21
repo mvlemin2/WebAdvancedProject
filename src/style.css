@@ -33,8 +33,17 @@ form{
     margin-bottom: 0.8rem;
 }
 
-.search-input{
+.search-input {
     font-size: 1.2rem;
+    padding: 0.2em;
+    border-radius: 0.25rem;
+    border: none;
+    outline: none;
+    background-color: rgb(234, 234, 234);
+}
+
+#sort, #limit {
+    font-size: 1rem;
     padding: 0.2em;
     border-radius: 0.25rem;
     border: none;
@@ -102,11 +111,18 @@ button[disabled]:active{
     background-color:lightgray;
     color: black;
     position: absolute;
-    inset: 1rem 1rem auto auto;
+    /* inset: 1rem 1rem auto auto; */
+    inset: 1rem 3rem auto auto;
 }
 
 #change-theme:hover{
     background-color:rgb(116, 115, 115);
+}
+
+.fa-circle-half-stroke{
+    position: absolute;
+    /* inset: 21px 150px auto auto; */
+    inset: 21px 1rem auto auto;
 }
 
 #btn-favorites{
@@ -117,6 +133,19 @@ button[disabled]:active{
 
 #btn-favorites:hover{
     background-color: rgb(250, 135, 196);
+}
+
+#numberOfFavorites{
+    position: absolute;
+    inset: 8px auto auto 130px;
+    background-color: rgb(7, 134, 117);
+    z-index: 10;
+    border-radius: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    text-align: center;
+    transition: 1s;
+    color: white;
 }
 
 button:hover{
