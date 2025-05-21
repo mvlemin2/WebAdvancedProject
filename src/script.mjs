@@ -1,182 +1,164 @@
 'use strict';
+console.log("Script loaded");
 
 const themeToggleButton = document.getElementById('change-theme');
-//themeToggleButton.addEventListener('mousover', themeToggleButton.backgroundColor ="#333333");
 const showFavoritesButton = document.getElementById('btn-favorites');
-// const numberOfFavoritesP = document.getElementById('numberOfFavoritesP');
 const numberOfFavorites = document.getElementById('numberOfFavorites');
 const body = document.body;
-let favoriteMovies = [];
-let movieArray = [];
-let counterArray = 0;
-loadTheme();
-loadFavorites();
-numberOfFavorites.textContent = `${favoriteMovies.length}`;
+let favoriteMovies = []; //Array voor favorieten
+let movieArray = []; //Array voor de resultaten die op het scherm moeten komen
+let counterArray = 0; //counter voor index van elementen op het scherm
+loadTheme(); //Thema opgeslagen in de LocalStorage ophalen
+loadFavorites(); //Favorieten opgeslagen in de LocalStorage ophalen
+numberOfFavorites.textContent = `${favoriteMovies.length}`; //Indicatie aantal favorieten
+const form = document.querySelector('form')
+const gallery = document.querySelector('.image-container');
+const sortButton = document.getElementById('btn-sort');
+const sortSelect = document.getElementById('sort');
+const limitSelect = document.getElementById('limit');
+const searchButton = document.getElementById('search-btn');
+startCounter(); //Functie starten die na 10 zoekopdrachten een pop-up toont met reclame om over te schakelen op de premium version van de website
+
+//Button sorteren uitschakelen indien er nog geen zoekopdracht is geweest of er geen resultaten zijn
+if(movieArray.length === 0){
+    sortButton.disabled = true;
+}
 
 //Thema wisselen
 function toggleTheme() {
     if (body.classList.contains('light-theme')) {
       body.classList.replace('light-theme', 'dark-theme');
       themeToggleButton.textContent = 'Licht thema';
-      //themeToggleButton.style.backgroundColor = 'lightgrey';
-      //themeToggleButton.style.Color = 'black';
-      localStorage.setItem('theme', 'dark-theme');
+      localStorage.setItem('theme', 'dark-theme'); //Thema opslaan in LocalStorage
     } else {
       body.classList.replace('dark-theme', 'light-theme');
       themeToggleButton.textContent = 'Donker thema';
-      localStorage.setItem('theme', 'light-theme');
+      localStorage.setItem('theme', 'light-theme'); //Thema opslaan in LocalStorage
     }
   }
-  
-  themeToggleButton.addEventListener('click', toggleTheme);
-  
-  function loadTheme() {
+
+//Event listener voor de Theme button  
+themeToggleButton.addEventListener('click', toggleTheme);
+
+//Functie om thema te laden bij het bezoeken van de website
+function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
-      body.className = savedTheme;
-      if (savedTheme === 'dark-theme') {
+        body.className = savedTheme;
+        if (savedTheme === 'dark-theme') {
         themeToggleButton.textContent = 'Licht thema';
-      } else {
+        } else {
         themeToggleButton.textContent = 'Donker thema';
-      }
+        }
     }
-  }
-
-// Mutation observer
-const mutationObserver = new MutationObserver(mutations => {
-    console.log(mutations);
-    console.log(`Aantal favorieten gewijzigd naar ${favoriteMovies.length}`);
-    numberOfFavorites.style.transform = 'scale(1.5,1.5)';
-    numberOfFavorites.style.background = 'pink';
-    //setTimeout(numberOfFavorites.style.transform = "scale(0.5,0.5)", 2000);
-    setTimeout(function(){numberOfFavorites.style.background = 'rgb(7, 134, 117)'}, 2000);
-    setTimeout(function(){numberOfFavorites.style.transform = 'scale(1,1)'}, 2000);
-  });
-  
-  // Start observeren
-  mutationObserver.observe(numberOfFavorites, {subtree: true, childList: true, characterData: true, characterDataOldValue: true});
-  // mutationObserver.observe(numberOfFavorites, {characterData: false, attributes: false, childList: true, subtree: false});
-
-
-//document.addEventListener('DOMContentLoaded', () => {
-    console.log("Script loaded");
-
-    const form = document.querySelector('form')
-    const gallery = document.querySelector('.image-container');
-    const sortButton = document.getElementById('btn-sort');
-    const sortSelect = document.getElementById('sort');
-    const limitSelect = document.getElementById('limit');
-    // let movieArray = [];
-    // let counterArray = 0;
-    const searchButton = document.getElementById('search-btn');
-    startCounter();
-   
-
-    if(movieArray.length === 0){
-        sortButton.disabled = true;
-    }
-
-    // Functie om movie card te maken
-    function createMovieCard(movie) {
-        const movieCard = document.createElement('div');
-        movieCard.className = 'movie-card';
-        const movieText = document.createElement('div');
-        movieText.className = 'movie-text';
-
-        const img = document.createElement('img');
-        img.src=movie.show.image?.medium;
-        //img.classList.add('lazy-image');
-
-        const title = movie.show.name;
-        const language = movie.show.language;
-        const rating = movie.show.rating.average;
-        let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
-        
-        function showAddFavoriteButton() {
-            for(let favorite of favoriteMovies){
-                if(favorite.show.id === movie.show.id){
-                    return "noShowButton";
-                }    
-            }
-            return "showButton";
-        }
-
-        function showRemoveFromFavoritesButton() {
-            for(let favorite of favoriteMovies){
-                if(favorite.show.id === movie.show.id){
-                    return "showButton";
-                }    
-            }
-            return "noShowButton";
-        }
-
-        const visibilityButtonAddFavorites = showAddFavoriteButton();
-        const visibilityButtonRemovefavorites = showRemoveFromFavoritesButton();
-
-        movieText.innerHTML = `
-        <h3>${title}</h3>
-        <p>Taal: ${language}</p>
-        <p>Rating: ${ratingDisplay}</p>
-        <button class="btn-favorite ${visibilityButtonAddFavorites}" value="${counterArray}" onclick="addToFavorites(${counterArray})"><i class="fa-solid fa-heart-circle-plus"></i></button>
-        <button class="btn-remove ${visibilityButtonRemovefavorites}" value="${counterArray}" onclick="removeFromFavorites(${counterArray})"><i class="fa-solid fa-heart-circle-xmark"></i></button>
-        `;
-
-
-
-
-        counterArray++;
-        movieCard.appendChild(img);
-        movieCard.appendChild(movieText);
-        
-        return movieCard;
-    }
-
-    // Functie om films te sorteren
-    function sortMovies() {
-        sortButton.disabled = false;
-        const sortOption = sortSelect.value;
-        const limit = parseInt(limitSelect.value);
-        counterArray = 0;
-       
-        // Films sorteren op basis van geselecteerde optie
-        switch(sortOption) {
-            case 'title-ascending':
-                movieArray.sort((a, b) => a.show.name.localeCompare(b.show.name));
-                break;
-            case 'title-descending':
-                movieArray.sort((a, b) => b.show.name.localeCompare(a.show.name));
-                break;
-        }
-    
-        // Aantal resultaten limiteren op basis van selectie
-        movieArray = movieArray.slice(0, limit);
-    
-        // Gallery leegmaken
-        gallery.innerHTML = '';
-    
-        // Controleren of er films in de Array zitten om weer te geven
-        if (movieArray.length === 0) {
-            sortButton.disabled = true;
-            gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden. Probeer een nieuwe zoekopdracht.</div>';
-            return;
-        }
-    
-        // Films toevoegen aan gallery
-        movieArray.forEach(movie => {
-            const movieCard = createMovieCard(movie);
-            gallery.appendChild(movieCard);
-        });
 }
 
-// Event listener voor de sortButton
+//Mutation observer op wijzigen van favorieten (toevoegen/verwijderen)
+const mutationObserver = new MutationObserver(mutations => {
+    numberOfFavorites.style.transform = 'scale(1.5,1.5)';
+    numberOfFavorites.style.background = 'pink';
+    setTimeout(function(){numberOfFavorites.style.background = 'rgb(7, 134, 117)'}, 2000);
+    setTimeout(function(){numberOfFavorites.style.transform = 'scale(1,1)'}, 2000);
+});
+  
+//Start mutation observer
+mutationObserver.observe(numberOfFavorites, {subtree: true, childList: true, characterData: true, characterDataOldValue: true});
+
+//Functie om movie card te maken om de zoekresultaten en favorieten op het scherm te tonen
+function createMovieCard(movie) {
+    const movieCard = document.createElement('div');
+    movieCard.className = 'movie-card';
+    const movieText = document.createElement('div');
+    movieText.className = 'movie-text';
+    const img = document.createElement('img');
+    
+    img.src=movie.show.image?.medium;
+    const title = movie.show.name;
+    const language = movie.show.language;
+    const rating = movie.show.rating.average;
+    let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
+    
+    //De knop om toe te voegen aan favorieten wordt alleen getoond indien de film nog niet in de favorieten zit
+    function showAddFavoriteButton() {
+        for(let favorite of favoriteMovies){
+            if(favorite.show.id === movie.show.id){
+                return "noShowButton";
+            }    
+        }
+        return "showButton";
+    }
+
+    //De knop om te verwijderen van favorieten wordt alleen getoond indien de film al in de favorieten zit
+    function showRemoveFromFavoritesButton() {
+        for(let favorite of favoriteMovies){
+            if(favorite.show.id === movie.show.id){
+                return "showButton";
+            }    
+        }
+        return "noShowButton";
+    }
+
+    const visibilityButtonAddFavorites = showAddFavoriteButton();
+    const visibilityButtonRemovefavorites = showRemoveFromFavoritesButton();
+
+    movieText.innerHTML = `
+    <h3>${title}</h3>
+    <p>Taal: ${language}</p>
+    <p>Rating: ${ratingDisplay}</p>
+    <button class="btn-favorite ${visibilityButtonAddFavorites}" value="${counterArray}" onclick="addToFavorites(${counterArray})"><i class="fa-solid fa-heart-circle-plus"></i></button>
+    <button class="btn-remove ${visibilityButtonRemovefavorites}" value="${counterArray}" onclick="removeFromFavorites(${counterArray})"><i class="fa-solid fa-heart-circle-xmark"></i></button>
+    `;
+
+    counterArray++; //Index voor element op het scherm
+    movieCard.appendChild(img);
+    movieCard.appendChild(movieText);
+    
+    return movieCard;
+}
+
+//Functie om films te sorteren
+function sortMovies() {
+    sortButton.disabled = false;
+    const sortOption = sortSelect.value;
+    const limit = parseInt(limitSelect.value);
+    counterArray = 0;
+    
+    //Films sorteren op basis van geselecteerde optie
+    switch(sortOption) {
+        case 'title-ascending':
+            movieArray.sort((a, b) => a.show.name.localeCompare(b.show.name));
+            break;
+        case 'title-descending':
+            movieArray.sort((a, b) => b.show.name.localeCompare(a.show.name));
+            break;
+    }
+
+    movieArray = movieArray.slice(0, limit); //Aantal resultaten limiteren op basis van selectie
+    gallery.innerHTML = ''; //Gallery leegmaken
+
+    //Controleren of er films in de Array zitten om weer te geven
+    if (movieArray.length === 0) {
+        sortButton.disabled = true;
+        gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden. Probeer een nieuwe zoekopdracht.</div>';
+        return;
+    }
+
+    //Films toevoegen aan gallery
+    movieArray.forEach(movie => {
+        const movieCard = createMovieCard(movie);
+        gallery.appendChild(movieCard);
+    });
+}
+
+//Event listener voor de Sort Button
 sortButton.addEventListener('click', sortMovies);
 
 //Zoekopdracht
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
     let query = form.querySelector('input').value;
-    form.querySelector('input').value='';
-    counterArray = 0;
+    form.querySelector('input').value=''; //Inputveld terug leegmaken na zoekopdracht
+    counterArray = 0; //Index voor element op het scherm resetten
 
     if(query==''){
         alert("Geen geldige zoekopdracht.");
@@ -184,177 +166,99 @@ form.addEventListener('submit',(e)=>{
     searchAPI(query);
 })
 
-//Data ophalen
+//Data ophalen uit de API tvmaze
 async function searchAPI(query){
-    //const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
-    //const movies = await response.json();
-    //movieArray = movies;
-    //console.log(movieArray);
+fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP fout! Status: ${response.status}`);
+        }
+        //console.log(response.status);
+        return response.json();
+    })
+    .then(movies => {  
+        movieArray = movies; //Films opslaan in Array   
+        sortMovies(); //Films sorteren en toevoegen aan gallery
+    })
+    .catch(error => {
+        gallery.innerHTML = `
+            <div class="error-melding">
+                <p>Er is iets misgegaan bij het ophalen van de films: ${error.message}</p>
+                <p>Probeer de pagina te vernieuwen of probeer het later opnieuw.</p>
+            </div>
+        `;
+        console.error('Fetch Error:', error);
+    });
+}
 
-    fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP fout! Status: ${response.status}`);
-            }
-            console.log(response.status);
-            return response.json();
-        })
-        .then(movies => {
-            // Films opslaan in Array
-            movieArray = movies;
-            console.log(movieArray);
-            // Films sorteren en toevoegen aan gallery
-            sortMovies();
-        })
-        .catch(error => {
-            gallery.innerHTML = `
-                <div class="error-melding">
-                    <p>Er is iets misgegaan bij het ophalen van de films: ${error.message}</p>
-                    <p>Probeer de pagina te vernieuwen of probeer het later opnieuw.</p>
-                </div>
-            `;
-            console.error('Fetch Error:', error);
-        });
-
+//Functie die na 10 zoekopdrachten een pop-up toont met reclame om over te schakelen op de premium versie van de website 
+function advertisementPremiumVersion() {
+    return new Promise(resolve => {
+    const handleClick = () => {
+        resolve();
+        };
+        searchButton.addEventListener('click', handleClick);
+    });
 }
     
-    function advertisementPremiumVersion() {
-        return new Promise(resolve => {
-        const handleClick = () => {
-            //searchButton.removeEventListener('click', handleClick);
-            resolve();
-            };
-            searchButton.addEventListener('click', handleClick);
-        });
+//Asynchrone functie die na 10 zoekopdrachten een pop-up toont met reclame om over te schakelen op de premium versie van de website 
+async function startCounter() {
+    let count = 0;
+    while(count === 0){
+        while (count < 10) {
+            await advertisementPremiumVersion();
+            count++;        
+            console.log(`${count} zoekopdracht(en) geregistreerd`);
+            }
+        alert("Schakel nu over op de Premium-versie zonder advertenties!");
+        count = 0; //Teller resetten zodat de functie blijft werken
     }
-    
-    // Functie: na 10 zoekopdrachten verschijnt er een pop-upadvertentie om over te schakelen op de premium versie van de app
-    async function startCounter() {
-        let count = 0;
-        while(count === 0){
-            while (count < 10) {
-                await advertisementPremiumVersion();
-                count++;        
-                console.log(`${count} zoekopdracht(en) geregistreerd`);
-                }
-            alert("Schakel nu over op de Premium-versie zonder advertenties!");
-            count = 0;
-        }
-    }
+}
 
-//});
-
+//Functie om films toe te voegen aan de favorieten
 function addToFavorites(getal){
-      for(let movie of favoriteMovies){
+    //Controle of film al aan de favorieten was toegevoegd 
+    for(let movie of favoriteMovies){
         if(movie.show.id === movieArray[getal].show.id){
             alert("Deze film werd al toegevoegd aan de favorieten");
             return;
         }
     }
 
-    //console.log(movieArray[getal].show.id);
-    console.log(`huidige ${favoriteMovies}`);
-    console.log(`Toegevoegd aan favorieten ${getal}`);
-    alert("Toegevoegd aan favorieten");
-    favoriteMovies.push(movieArray[getal]);
-    console.log(favoriteMovies);
-    sortMovies();
-    numberOfFavorites.textContent = `${favoriteMovies.length}`;
-    localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+    favoriteMovies.push(movieArray[getal]); //Toevoegen aan Array
+    sortMovies(); //Gallery updaten zodat de juiste buttons verschijnen op de elementen
+    numberOfFavorites.textContent = `${favoriteMovies.length}`; //Aantal updaten
+    localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
 }
 
+//Functie om de opgeslagen favorieten te laden bij het bezoeken van de website
 function loadFavorites() {
     const savedFavorites = localStorage.getItem('favorites');
     if (savedFavorites) {
       favoriteMovies = JSON.parse(savedFavorites);
     }
-  }
-
-function viewFavorites(){
-    // for(let favorite of favoriteMovies){
-    //     createFavoritesCard(favorite);
-    //     gallery.appendChild(favoriteCard);
-    // }
-    //console.log(favoriteMovies);
-    gallery.innerHTML = '';
-    counterArray = 0;
-    movieArray = favoriteMovies;
-    sortMovies();
-    // favoriteMovies.forEach(movie => {
-    //     //console.log(movie);
-    //     //const favoriteCard = createFavoritesCard(movie);
-    //     //gallery.appendChild(favoriteCard);
-    // });
 }
 
-// function createFavoritesCard(favorite) {
-//     const favoriteCard = document.createElement('div');
-//     favoriteCard.className = 'movie-card';
-//     const favoriteText = document.createElement('div');
-//     favoriteText.className = 'movie-text';
+//Functie om de favorieten te bekijken in de gallery
+function viewFavorites(){
+    gallery.innerHTML = ''; //Gallery leegmaken
+    counterArray = 0; //Index voor element op het scherm resetten
+    movieArray = favoriteMovies; //Elementen van de Array van favorieten overzetten naar de Array voor de gallery
+    sortMovies(); //Films sorteren en toevoegen aan gallery
+}
 
-//     const img = document.createElement('img');
-//     img.src=favorite.show.image?.medium;
-//     //img.classList.add('lazy-image');
-
-//     const title = favorite.show.name;
-//     const language = favorite.show.language;
-//     const rating = favorite.show.rating.average;
-//     let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
-
-//     favoriteText.innerHTML = `
-//     <h3>${title}</h3>
-//     <p>Taal: ${language}</p>
-//     <p>Rating: ${ratingDisplay}</p>
-//     <button class="btn-remove" value="${counterArray}" onclick="removeFromFavorites(${counterArray})">X</button>
-//     `;
-//     counterArray++;
-//     favoriteCard.appendChild(img);
-//     favoriteCard.appendChild(favoriteText);
-    
-//     return favoriteCard;
-// }
-
+//Event listener voor Favorieten Button
 showFavoritesButton.addEventListener('click', viewFavorites);
 
-//console.log(favoriteMovies);
+//Functie om favorieten uit het lijstje te verwijderen
 function removeFromFavorites(getal){
-    
-  //console.log(movieArray[getal].show.id);
-
-  console.log(`Verwijderd uit favorieten ${getal}`);
-  alert("Verwijderd uit favorieten");
-  //console.log(movieArray === favoriteMovies);
-  //console.log(movieArray);
-  console.log(favoriteMovies);
-//   if(movieArray === favoriteMovies){
-//     favoriteMovies.splice(getal, 1);
-//     movieArray = favoriteMovies;
-//     sortMovies();
-//   }else{
-//     favoriteMovies.splice(getal, 1);
-//   }
-
-/* CODE TE RECUPEREREN INDIEN HET NIET WERKT
-  favoriteMovies.splice(getal, 1);
-  console.log(favoriteMovies);
-  sortMovies();
-  localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
-*/
-
-  //sortMovies();
-  //viewFavorites();
-
-  for(let movie of favoriteMovies){
-    if(movie.show.id === movieArray[getal].show.id){
-        let index = favoriteMovies.indexOf(movie);
-        favoriteMovies.splice(index, 1);
-        sortMovies();
-        numberOfFavorites.textContent = `${favoriteMovies.length}`;
-        localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+    for(let movie of favoriteMovies){
+        if(movie.show.id === movieArray[getal].show.id){
+            let index = favoriteMovies.indexOf(movie);
+            favoriteMovies.splice(index, 1);
+            sortMovies(); //Gallery updaten zodat de juiste buttons verschijnen op de elementen
+            numberOfFavorites.textContent = `${favoriteMovies.length}`; //Aantal updaten
+            localStorage.setItem('favorites', JSON.stringify(favoriteMovies)); //Favorieten opslaan in Localstorage
+        }
     }
-}
-
-
-
 }

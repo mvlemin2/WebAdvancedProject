@@ -19,9 +19,7 @@ body.light-theme{
 
 h1{
     text-align: center;
-    /* color: white; */
     margin-top: 1rem;
-    /* z-index: -10; */
 }
 
 form{
@@ -111,7 +109,6 @@ button[disabled]:active{
     background-color:lightgray;
     color: black;
     position: absolute;
-    /* inset: 1rem 1rem auto auto; */
     inset: 1rem 3rem auto auto;
 }
 
@@ -121,7 +118,6 @@ button[disabled]:active{
 
 .fa-circle-half-stroke{
     position: absolute;
-    /* inset: 21px 150px auto auto; */
     inset: 21px 1rem auto auto;
 }
 
