@@ -87,7 +87,7 @@ function createMovieCard(movie) {
     const rating = movie.show.rating.average;
     let ratingDisplay = (rating === null)? "Nog niet beoordeeld" : rating;
     
-    //De knop om toe te voegen aan favorieten wordt alleen getoond indien de film nog niet in de favorieten zit
+    //De knop om toe te voegen aan favorieten wordt alleen getoond indien de serie nog niet in de favorieten zit
     function showAddFavoriteButton() {
         for(let favorite of favoriteMovies){
             if(favorite.show.id === movie.show.id){
@@ -97,7 +97,7 @@ function createMovieCard(movie) {
         return "showButton";
     }
 
-    //De knop om te verwijderen van favorieten wordt alleen getoond indien de film al in de favorieten zit
+    //De knop om te verwijderen van favorieten wordt alleen getoond indien de serie al in de favorieten zit
     function showRemoveFromFavoritesButton() {
         for(let favorite of favoriteMovies){
             if(favorite.show.id === movie.show.id){
@@ -125,14 +125,14 @@ function createMovieCard(movie) {
     return movieCard;
 }
 
-//Functie om films te sorteren
+//Functie om series te sorteren
 function sortMovies() {
     sortButton.disabled = false;
     const sortOption = sortSelect.value;
     const limit = parseInt(limitSelect.value);
     counterArray = 0;
     
-    //Films sorteren op basis van geselecteerde optie
+    //Series sorteren op basis van geselecteerde optie
     switch(sortOption) {
         case 'title-ascending':
             movieArray.sort((a, b) => a.show.name.localeCompare(b.show.name));
@@ -145,14 +145,14 @@ function sortMovies() {
     const movieArray2 = movieArray.slice(0, limit); //Aantal resultaten limiteren op basis van selectie
     gallery.innerHTML = ''; //Gallery leegmaken
 
-    //Controleren of er films in de Array zitten om weer te geven
+    //Controleren of er series in de Array zitten om weer te geven
     if (movieArray2.length === 0) {
         sortButton.disabled = true;
-        gallery.innerHTML = '<div class="geen-resultaten">Er werden geen films gevonden. Probeer een nieuwe zoekopdracht.</div>';
+        gallery.innerHTML = '<div class="geen-resultaten">Er werden geen series gevonden. Probeer een nieuwe zoekopdracht.</div>';
         return;
     }
 
-    //Films toevoegen aan gallery
+    //Series toevoegen aan gallery
     movieArray2.forEach(movie => {
         const movieCard = createMovieCard(movie);
         gallery.appendChild(movieCard);
@@ -170,7 +170,7 @@ form.addEventListener('submit',(e)=>{
     counterArray = 0; //Index voor element op het scherm resetten
 
     if(query==''){
-        alert("Geen geldige zoekopdracht.");
+        alert("Geen geldige zoekopdracht. Voer een zoekterm in.");
     }
     searchAPI(query);
 })
@@ -186,13 +186,13 @@ fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
         return response.json();
     })
     .then(movies => {  
-        movieArray = movies; //Films opslaan in Array   
-        sortMovies(); //Films sorteren en toevoegen aan gallery
+        movieArray = movies; //Series opslaan in Array   
+        sortMovies(); //Series sorteren en toevoegen aan gallery
     })
     .catch(error => {
         gallery.innerHTML = `
             <div class="error-melding">
-                <p>Er is iets misgegaan bij het ophalen van de films: ${error.message}</p>
+                <p>Er is iets misgegaan bij het ophalen van de series: ${error.message}</p>
                 <p>Probeer de pagina te vernieuwen of probeer het later opnieuw.</p>
             </div>
         `;
@@ -224,12 +224,12 @@ async function startCounter() {
     }
 }
 
-//Functie om films toe te voegen aan de favorieten
+//Functie om serie toe te voegen aan de favorieten
 function addToFavorites(getal){
-    //Controle of film al aan de favorieten was toegevoegd 
+    //Controle of serie al aan de favorieten was toegevoegd 
     for(let movie of favoriteMovies){
         if(movie.show.id === movieArray[getal].show.id){
-            alert("Deze film werd al toegevoegd aan de favorieten");
+            alert("Deze serie werd al toegevoegd aan de favorieten");
             return;
         }
     }
@@ -253,7 +253,7 @@ function viewFavorites(){
     gallery.innerHTML = ''; //Gallery leegmaken
     counterArray = 0; //Index voor element op het scherm resetten
     movieArray = favoriteMovies; //Elementen van de Array van favorieten overzetten naar de Array voor de gallery
-    sortMovies(); //Films sorteren en toevoegen aan gallery
+    sortMovies(); //Series sorteren en toevoegen aan gallery
 }
 
 //Event listener voor Favorieten Button

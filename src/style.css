@@ -187,7 +187,6 @@ img:hover{
     gap: 20px;
     width: 90%;
     margin: 10px auto;
-
 }
 
 .movie-card{
@@ -196,6 +195,7 @@ img:hover{
     border-radius: 0.5rem;
     color: white;
     box-shadow: 0 0 5px white;
+    max-width: 300px;
 }
 
 .movie-text{
@@ -215,7 +215,7 @@ h3{
     padding-bottom: 30px;
 }
 
-@media (max-width:580px)
+@media (max-width:640px)
 {
     img{
         height: 350px;
@@ -228,4 +228,11 @@ h3{
         padding-top: 3.5rem;
     }
 
+}
+
+@media (min-width: 1756px)
+{
+    .image-container{
+        max-width: 1580px;
+    }
 }
