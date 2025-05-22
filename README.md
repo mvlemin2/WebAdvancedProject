@@ -6,61 +6,75 @@ Deze interactieve single-page webapplicatie maakt gebruik van de API TVMaze. De 
 
 * [API TVMaze] (https://www.tvmaze.com/api)
 
-# Implementatie van elke technisch vereiste (waar in de code?/lijnnummer)
+# Implementatie van elke technisch vereiste (lijnnummer)
 
 ## DOM manipulatie  
-    1) Elementen selecteren: 4-8, 15-20
-    2) Elementen manipuleren: aantal favorieten updaten (14), function toggleTheme (29-43), function loadTheme (49-63), mutation observer (66-71), function createMovieCard (77-126), function sortMovies (129-160), inputveld leegmaken (168-169), catch-error (192-200), ... (niet-exhaustieve lijst)
-    3) Events aan elementen koppelen: 
-        * Event listeners bij buttons 'Zoeken', 'Sorteren', 'Thema', 'Favorieten' (46, 163, 166, 209, 260)
-        * Events 'onclick' in html: toevoegen aan en verwijderen van favorieten (117-118)
+1) **Elementen selecteren**: 4-8, 15-20
+2) **Elementen manipuleren**: aantal favorieten updaten (14), function toggleTheme (29-43), function loadTheme (49-63), mutation observer (66-71), function createMovieCard (77-126), function sortMovies (129-160), inputveld leegmaken (168-169), catch-error (192-200), ... (niet-exhaustieve lijst)
+3) **Events aan elementen koppelen**: 
+    * Event listeners bij buttons 'Zoeken', 'Sorteren', 'Thema', 'Favorieten' (46, 163, 166, 209, 260)
+    * Events 'onclick' in html: toevoegen aan en verwijderen van favorieten (117-118)
 ## Modern JavaScript  
-    1) Gebruik van constanten: 4-8, 15-20, ... (niet-exhaustieve lijst)
-    2) Template literals:
+1) **Gebruik van constanten**: 4-8, 15-20, ... (niet-exhaustieve lijst)
+2) **Template literals**:
     * movieCard (114-119)
     * Data ophalen (180, 183, 193-198)
     * console.log tellen van het aantal zoekopdrachten (220)
     * Aantal favorieten (14, 240, 270)
-    3) Iteratie over arrays: 92-96, 102-106, 156-159, 230-235, 264-272
-    4) Array methodes: 138, 141, 145, 156, 237, 266, 267, 270 (sort, slice, forEach, push, indexOf, splice)
-    5) Arrow functions: 66-71, 138, 141, 156-159, 166-176, 181-187, 188-191, 192-200, 205-210, 206-208
-    6) Conditional (ternary) operator (moderne if..else): 88
-    7) Callback functions: 46, 163, 166, 209, 260
-    8) Promises: 204-211
-    9) Async & Await: 179-201, 214-225, 
-    10) Observer API (1 is voldoende): 66-71
+3) **Iteratie over arrays**: 92-96, 102-106, 156-159, 230-235, 264-272
+4) **Array methodes**: 138, 141, 145, 156, 237, 266, 267, 270 (sort, slice, forEach, push, indexOf, splice)
+5) **Arrow functions**: 66-71, 138, 141, 156-159, 166-176, 181-187, 188-191, 192-200, 205-210, 206-208
+6) **Conditional (ternary) operator (moderne if..else)**: 88
+7) **Callback functions**: 46, 163, 166, 209, 260
+8) **Promises**: 204-211
+9) **Async & Await**: 179-201, 214-225, 
+10) **Observer API (1 is voldoende)**: 66-71
 ## Data & API
-    1) Fetch om data op te halen: 179-201
-    2) JSON manipuleren en weergeven: 77-126, 129-160, 179-201, 228-241, 244-249, 263-273
+1) **Fetch om data op te halen**: 179-201
+2) **JSON manipuleren en weergeven**: 77-126, 129-160, 179-201, 228-241, 244-249, 263-273
 ## Opslag & validatie
-    1) Formulier validatie: 172-174, 230-235
-    2) Gebruik van LocalStorage: 12, 13, 29-43, 49-63, 228-241, 244-249, 263-273
+1) **Formulier validatie**: 172-174, 230-235
+2) **Gebruik van LocalStorage**: 12, 13, 29-43, 49-63, 228-241, 244-249, 263-273
 ## Styling & layout
-    1) Basis HTML layout (flexbox of CSS grid kan hiervoor worden gebruikt): ok
-    2) Basis CSS: hover, active, disabled bij buttons en/of afbeeldingen, switchen van licht naar donker thema, responsive design, header die blijft staan, mutation observer op aantal favorieten, ...
-    3) Gebruiksvriendelijke elementen (verwijderknoppen, icoontjes,...): icoontjes bij favorieten, thema, zoeken, sorteren, toevoegen aan favorieten, 4) verwijderen uit favorieten
+1) **Basis HTML layout (flexbox of CSS grid kan hiervoor worden gebruikt)**: ok
+2) **Basis CSS**: hover, active, disabled bij buttons en/of afbeeldingen, switchen van licht naar donker thema, responsive design, header die blijft staan, mutation observer op aantal favorieten, ...
+3) **Gebruiksvriendelijke elementen (verwijderknoppen, icoontjes,...)**: icoontjes bij favorieten, thema, zoeken, sorteren, toevoegen aan favorieten en verwijderen uit favorieten
 ## Tooling & structuur
-    1) Project is opgezet met Vite : ok
-    2) Een correcte folderstructuur wordt aangehouden (gescheiden html, css en js files, src folder, dist folder, ...): ok
+1) **Project is opgezet met Vite**: ok
+2) **Een correcte folderstructuur wordt aangehouden (gescheiden html, css en js files, src folder, dist folder, ...)**: ok
 
 # Installatiehandleiding
 
 ## Webapplicatie openen
 1) Open de code in VS Code.
 2) Voer de volgende code uit in de terminal `npm run preview`. 
-3) Klik op de link. De webapplicatie zal zich openen in de browser.
+3) Klik op de link. De webapplicatie zal openen in een browservenster.
 
 ## Overzicht van de functies en screenshots
 
-1) Als gebruiker kan je een zoekopdracht invoeren en op de zoeken-button klikken. Je kan vóór de zoekopdracht al kiezen hoe je wil sorteren en filteren door de juiste opties aan te duiden. Wanneer er een zoekopdracht gebeurt zonder zoekterm, zal er een alert komen.
-2) Na de zoekopdracht worden de resultaten op het scherm getoond. Indien er geen resultaten worden gevonden zal er een boodschap in de gallery komen. De resultaten kunnen gesorteerd en gefilterd worden door de juiste opties aan te duiden en te klikken op de sorteren-button. Wanneer er geen resultaten in de gallery zichtbaar zijn, zal de sorteren-button automatisch uitgeschakeld worden.
+Overzicht functies: ![](print_screens/Overzicht_functies.jpg)
+
+1) Als gebruiker kan je een zoekopdracht invoeren en op de zoeken-button klikken. Je kan vóór de zoekopdracht al kiezen hoe je wil sorteren en filteren door de gewenste opties te selecteren. Wanneer er een zoekopdracht gebeurt zonder zoekterm, zal er een alert komen.
+![](print_screens/Zoekopdracht.gif)
+2) Na de zoekopdracht worden de resultaten op het scherm getoond. Indien er geen resultaten worden gevonden, zal er een boodschap in de gallery komen. De resultaten kunnen gesorteerd en gefilterd worden door de gewenste opties te selecteren en te klikken op de sorteren-button. Wanneer er geen resultaten in de gallery zichtbaar zijn, zal de sorteren-button automatisch uitgeschakeld worden (grijs en niet clickable).
+![](print_screens/Sorteren_en_filteren.gif)
 3) Als gebruiker kan ik nu series toevoegen aan mijn favorieten door op de groene add-button te klikken. Wanneer ik dit doe, zal het aantal favorieten worden geüpdatet. Het icoon linksboven zal hierbij oplichten. De groene add-button verdwijnt nu bij de serie, en wordt vervangen door een rode remove-button.
+![](print_screens/Favorieten_toevoegen_en_verwijderen.gif)
 4) Als gebruiker kan ik eveneens series verwijderen uit mijn favorieten door op de rode remove-button te klikken. Wanneer ik dit doe, zal het aantal favorieten worden geüpdatet. Het icoon linksboven zal hierbij oplichten. De rode remove-button verdwijnt nu weer bij de serie, en wordt vervangen door de groene remove-button.
+![](print_screens/Favorieten_toevoegen_en_verwijderen.gif)
 5) Als gebruiker kan ik mijn lijst met opgeslagen favorieten bekijken. Dit doe ik door op de favorieten-button te klikken. Ook in deze lijst kan ik sorteren en filteren door de juiste opties aan te duiden en te klikken op de sorteren-button. De lijst met favorieten wordt opgeslagen voor de gebruiker, waardoor deze beschikbaar blijft na het verlaten van de website.
+![](print_screens/Favorieten_bekijken_en_verwijderen.gif)
 6) Ook in het favorieten-scherm kan ik series verwijderen uit de favorieten via de rode remove-button. De serie verdwijnt dan onmiddellijk uit de lijst.
+![](print_screens/Favorieten_bekijken_en_verwijderen.gif)
 7) Als gebruiker kan ik kiezen voor een donker of licht thema. Mijn voorkeur zal worden opgeslagen, waardoor ik bij een volgende sessie onmiddellijk het eerder gekozen thema zal zien.
-8) Telkens na 10 zoekopdrachten krijgt de gebruiker een pop-up advertentie die de gebruiker aanspoort om over te stappen op de (betalende) premium versie van de website zonder advertenties.
-9) Wanneer het browservenster resize, zal de website lay-out zich automatisch aanpassen. De website is ook compatibel met kleinere schermen zoals die van een tablet of smartphone.
+![](print_screens/Dark_theme.jpg)
+![](print_screens/Light_theme.jpg)
+![](print_screens/Licht_en_donker_thema.gif)
+8) Na elke 10 zoekopdrachten zal de gebruiker een pop-up advertentie krijgen (alert) die de gebruiker aanspoort om over te stappen op de (betalende) premium-versie van de website zonder advertenties.
+![](print_screens/Pop-up_met_reclame_na_10_zoekopdrachten.jpg)
+![](print_screens/Pop-up_met_reclame_na_10_zoekopdrachten.gif)
+9) Wanneer de gebruiker het browservenster resizet, zal de lay-out van de website automatisch aangepast worden. De website is ook compatibel met kleinere schermen zoals die van een tablet of een smartphone.
+![](print_screens/Responsive_Web_Design.gif)
 
 # Gebruikte bronnen
 

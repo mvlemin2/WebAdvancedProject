@@ -60,7 +60,7 @@ button{
     color: white;
     border: none;
     font-weight: bold;
-    border-radius: 0.25em; 
+    border-radius: 0.25em;
     transition: 1s;
 }
 
@@ -183,7 +183,8 @@ img:hover{
     display: grid;
     place-content: center;
     text-align: center;
-    grid-template-columns: repeat(auto-fit,minmax(220px,0.4fr));
+    /* grid-template-columns: repeat(auto-fit,minmax(220px,0.4fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
     gap: 20px;
     width: 90%;
     margin: 10px auto;
@@ -217,11 +218,8 @@ h3{
 
 @media (max-width:640px)
 {
-    img{
-        height: 350px;
-    }
     .image-container{
-        grid-template-columns: repeat(auto-fit,minmax(250px,300px));
+        grid-template-columns: repeat(auto-fit,minmax(220px,300px));
     }
 
     h1{
