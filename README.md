@@ -57,21 +57,27 @@ Overzicht functies: ![](print_screens/Overzicht_functies.jpg)
 1) Als gebruiker kan je een zoekopdracht invoeren en op de zoeken-button klikken. Je kan vóór de zoekopdracht al kiezen hoe je wil sorteren en filteren door de gewenste opties te selecteren. Wanneer er een zoekopdracht gebeurt zonder zoekterm, zal er een alert komen.
 
 ![](print_screens/Zoekopdracht.gif)
+
 2) Na de zoekopdracht worden de resultaten op het scherm getoond. Indien er geen resultaten worden gevonden, zal er een boodschap in de gallery komen. De resultaten kunnen gesorteerd en gefilterd worden door de gewenste opties te selecteren en te klikken op de sorteren-button. Wanneer er geen resultaten in de gallery zichtbaar zijn, zal de sorteren-button automatisch uitgeschakeld worden (grijs en niet clickable).
 
 ![](print_screens/Sorteren_en_filteren.gif)
+
 3) Als gebruiker kan ik nu series toevoegen aan mijn favorieten door op de groene add-button te klikken. Wanneer ik dit doe, zal het aantal favorieten worden geüpdatet. Het icoon linksboven zal hierbij oplichten. De groene add-button verdwijnt nu bij de serie, en wordt vervangen door een rode remove-button.
 
 ![](print_screens/Favorieten_toevoegen_en_verwijderen.gif)
+
 4) Als gebruiker kan ik eveneens series verwijderen uit mijn favorieten door op de rode remove-button te klikken. Wanneer ik dit doe, zal het aantal favorieten worden geüpdatet. Het icoon linksboven zal hierbij oplichten. De rode remove-button verdwijnt nu weer bij de serie, en wordt vervangen door de groene remove-button.
 
 ![](print_screens/Favorieten_toevoegen_en_verwijderen.gif)
+
 5) Als gebruiker kan ik mijn lijst met opgeslagen favorieten bekijken. Dit doe ik door op de favorieten-button te klikken. Ook in deze lijst kan ik sorteren en filteren door de juiste opties aan te duiden en te klikken op de sorteren-button. De lijst met favorieten wordt opgeslagen voor de gebruiker, waardoor deze beschikbaar blijft na het verlaten van de website.
 
 ![](print_screens/Favorieten_bekijken_en_verwijderen.gif)
+
 6) Ook in het favorieten-scherm kan ik series verwijderen uit de favorieten via de rode remove-button. De serie verdwijnt dan onmiddellijk uit de lijst.
 
 ![](print_screens/Favorieten_bekijken_en_verwijderen.gif)
+
 7) Als gebruiker kan ik kiezen voor een donker of licht thema. Mijn voorkeur zal worden opgeslagen, waardoor ik bij een volgende sessie onmiddellijk het eerder gekozen thema zal zien.
 
 ![](print_screens/Dark_theme.jpg)
