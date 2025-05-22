@@ -52,7 +52,9 @@ Deze interactieve single-page webapplicatie maakt gebruik van de API TVMaze. De 
 
 ## Overzicht van de functies en screenshots
 
-Overzicht functies: ![](print_screens/Overzicht_functies.jpg)
+* Overzicht functies: 
+
+![](print_screens/Overzicht_functies.jpg)
 
 1) Als gebruiker kan je een zoekopdracht invoeren en op de zoeken-button klikken. Je kan vóór de zoekopdracht al kiezen hoe je wil sorteren en filteren door de gewenste opties te selecteren. Wanneer er een zoekopdracht gebeurt zonder zoekterm, zal er een alert komen.
 
@@ -80,9 +82,15 @@ Overzicht functies: ![](print_screens/Overzicht_functies.jpg)
 
 7) Als gebruiker kan ik kiezen voor een donker of licht thema. Mijn voorkeur zal worden opgeslagen, waardoor ik bij een volgende sessie onmiddellijk het eerder gekozen thema zal zien.
 
+* Dark theme:
+
 ![](print_screens/Dark_theme.jpg)
 
+* Light theme:
+
 ![](print_screens/Light_theme.jpg)
+
+* Voorbeeld gebruikservaring:
 
 ![](print_screens/Licht_en_donker_thema.gif)
 
